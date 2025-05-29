@@ -1,0 +1,262 @@
+/* Importa duas fontes do Google Fonts para usar no site */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+/* Reset básico e definição da fonte padrão */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura/altura dos elementos */
+    font-family: 'Inter', sans-serif; /* Define a fonte principal */
+}
+
+/* Estiliza o corpo da página */
+body {
+    width: 100%;
+    height: 100vh; /* Ocupa 100% da altura da janela */
+    display: flex; /* Centraliza o conteúdo usando flexbox */
+    justify-content: center;
+    align-items: center;
+    background: #188c406e; /* Cor de fundo azul translúcida */
+}
+
+/* Container principal que envolve imagem e formulário */
+.container {
+    width: 80%;
+    height: 80vh;
+    display: flex; /* Layout lado a lado */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212); /* Sombra para profundidade */
+}
+
+/*  área da imagem */
+.form-image {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a8f3adbc; /* Cor bege clara com transparência */
+    padding: 1rem;
+}
+
+/* Tamanho da imagem */
+.form-image img {
+    width: 31rem;
+}
+
+/*formulário */
+.form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Fundo branco */
+    padding: 3rem;
+}
+
+/* Cabeçalho do formulário */
+.form-header {
+    margin-bottom: 0,5rem; /* Está com vírgula, deveria ser ponto: 0.5rem */
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Estilização do botão de agendar (parte superior) */
+.login-button {
+    display: flex;
+    align-items: center;
+}
+
+.login-button button {
+    border: none;
+    background-color: #086015f9; /* Cor azul */
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Efeito de hover no botão */
+.login-button button:hover {
+    background-color: #086d1791; /* Azul mais escuro/transparente ao passar o mouse */
+}
+
+/* Link dentro do botão */
+.login-button button a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+}
+
+/* Linha decorativa abaixo do título */
+.form-header h1::after {
+    content: '';
+    display: block;
+    width: 5rem;
+    height: 0.3rem;
+    background-color: #63ff6b; /* Verde neon */
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
+}
+
+/* Grupo de inputs (campos do formulário) */
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+/* Cada campo de entrada (nome, email, etc.) */
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.1rem;
+}
+
+/* Estilização dos campos de input */
+.input-box input {
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #0000001c; /* Sombra leve */
+    font-size: 0.8rem;
+}
+
+/* Cor de fundo ao passar o mouse */
+.input-box input:hover {
+    background-color: #eeeeee75; /* Cinza bem claro e translúcido */
+}
+
+/* Borda azul clara quando o campo está em foco */
+.input-box input:focus-visible {
+    outline: 1px solid #63f5ff;
+}
+
+/* Estilização dos textos dos rótulos */
+.input-box label,
+.gender-title h6 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #000000c0; /* Preto com opacidade */
+}
+
+/* Cor do placeholder */
+.input-box input::placeholder {
+    color: #000000be; /* Preto com leve transparência */
+}
+
+/* Grupo dos botões de seleção de tipo de resíduo */
+.gender-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.62rem;
+    padding: 0 .5rem;
+}
+
+/* Cada opção (entulho, reciclável, etc.) */
+.gender-input {
+    display: flex;
+    align-items: center;
+}
+
+/* Espaço entre o botão e o texto */
+.gender-input input {
+    margin-right: 0.35rem;
+}
+
+.gender-input label {
+    font-size: 0.81rem;
+    font-weight: 600;
+    color: #000000c0;
+}
+
+/* Botão de "Continuar" na parte inferior */
+.continue-button button {
+    width: 100%;
+    margin-top: 2.5rem;
+    border: none;
+    background-color: #2e6b37f4;
+    padding: 0.62rem;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Efeito ao passar o mouse no botão */
+.continue-button button:hover {
+    background-color: #093f11eb;
+}
+
+/* Estilo do link dentro do botão */
+.continue-button button a {
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+a{
+    text-decoration: none;
+    width: 100%;
+    margin-top: 2.5rem;
+    border: none;
+    background-color: #2e6b37f4;
+    padding: 0.62rem;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+
+}
+a:hover{
+    background-color:#093f11eb ;
+    color: white;
+}
+
+/* MEDIA QUERIES - Responsividade */
+
+/* Ajustes para telas menores que 1330px */
+@media screen and (max-width: 1330px) {
+    .form-image {
+        display: none; /* Some com a imagem para dar mais espaço */
+    }
+    .container {
+        width: 50%; /* Reduz a largura */
+    }
+    .form {
+        width: 100%; /* Formulário passa a ocupar toda a largura */
+    }
+}
+
+/* Ajustes para telas menores que 1064px */
+@media screen and (max-width: 1064px) {
+    .container {
+        width: 90%;
+        height: auto;
+    }
+
+    .input-group {
+        flex-direction: column; /* Empilha os campos */
+        z-index: 5;
+        padding-right: 5rem;
+        max-height: 10rem;
+        overflow-y: scroll; /* Adiciona scroll vertical se ultrapassar altura */
+        flex-wrap: nowrap;
+    }
+
+    .gender-inputs {
+        margin-top: 2rem;
+    }
+
+    .gender-group {
+        flex-direction: column; /* Empilha as opções de resíduo */
+    }
+
+    .gender-title h6 {
+        margin: 0;
+    }
+
+    .gender-input {
+        margin-top: 0.5rem;
+    }
+}
