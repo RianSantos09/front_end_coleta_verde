@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Ícone da aba do navegador -->
+    <link rel="shortcut icon" href="assets/img/coleta-verde.png" type="image/x-icon">
+
+    <!-- Importa o Bootstrap 5 para estilos prontos e responsividade -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Importa o CSS para o projeto -->
+    <link rel="stylesheet" href="assets/style.css">
+
+    <title>PERFIL DO FUNCIONÁRIO</title>
+
+</head>
+<body>
+    
+    <!-- Cabeçalho da página com logo e botão de logout -->
+    <header>
+        <div class="logo">
+        <!-- Logotipo do sistena -->
+        <img src="assets/img/coleta-verde-header-logo.png" alt="Logo Coleta Verde" />
+            <h1>COLETA VERDE</h1>
+        </div>
+        <!-- Botão de sair -->
+        <button class="logout">Sair <span class="icon"></span></button>
+    </header>
+
+  <!-- Seção de perfil com avatar e dados do funcionário -->
+  <section class="perfil">
+    <div class="info">
+      <div class="avatar">
+        <img src="assets/icons/profile.png">
+      </div>
+        <div class="dados">
+            <h2>Nome do Funcionário</h2>
+                <p>emailexample@gmail.com</p>
+                <p>(00) 99999-9999</p>
+                <p>Endereço, Nº - Cidade</p>
+        </div>
+    </div>
+    <!-- Botão para editar o perfil -->
+    <button class="editar">Editar Perfil</button>
+  </section>
+
+  <!-- Área principal com o botão de ver rotas -->
+  <main class="main">
+    <div class="style-btn">
+      <!-- Botão de ver rotas (link estilizado como botão) -->
+      <a class="btn-link" type="button" href="ver-rotas.html">VER ROTAS<br>
+        <img src="assets/icons/mapa.png" alt="Ícone de Mapa">
+      </a>
+    </div>
+  </main>
+
+  <!-- Rodapé da página -->
+  <footer>
+    <p>2025 © Coleta Verde</p>
+    <p>Todos os direitos reservados</p>
+  </footer>
+
+</body>
+</html>
