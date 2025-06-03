@@ -1,267 +1,280 @@
-/* Importa duas fontes do Google Fonts para usar no site */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
-
-/* Reset básico e definição da fonte padrão */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box; /* Garante que padding e border não aumentem a largura/altura dos elementos */
-    font-family: 'Inter', sans-serif; /* Define a fonte principal */
-}
-
-/* Estiliza o corpo da página */
-body {
-    width: 100%;
-    height: 100vh; /* Ocupa 100% da altura da janela */
-    display: flex; /* Centraliza o conteúdo usando flexbox */
-    justify-content: center;
-    align-items: center;
-    background: #FFFDF5; /* Cor de fundo azul translúcida */
-}
-
-/* Container principal que envolve imagem e formulário */
-.container {
-    width: 80%;
-    height: 80vh;
-    display: flex; /* Layout lado a lado */
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212); /* Sombra para profundidade */
-}
-
-/*  área da imagem */
-.form-image {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #E2DBD0; /* Cor bege clara com transparência */
-    padding: 1rem;
-}
-
-/* Tamanho da imagem */
-.form-image img {
-    width: 31rem;
-}
-
-/*formulário */
-.form {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff; /* Fundo branco */
-    padding: 3rem;
-}
-
 /* Cabeçalho do formulário */
 .form-header {
-    margin-bottom: 0,5rem; /* Está com vírgula, deveria ser ponto: 0.5rem */
+    margin-bottom: 0, 5rem;
     display: flex;
     justify-content: space-between;
 }
 
-/* Estilização do botão de agendar (parte superior) */
-.login-button {
-    display: flex;
-    align-items: center;
+
+@keyframes expandLine {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 60px;
+    }
 }
 
-.login-button button {
-    border: none;
-    background-color: #628B35; /* Cor azul */
-    padding: 0.4rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
+.form-subtitle {
+    color: #666;
+    font-size: 1rem;
+    margin-top: 10px;
 }
 
-/* Efeito de hover no botão */
-.login-button button:hover {
-    background-color: #4c6a23; /* Azul mais escuro/transparente ao passar o mouse */
-}
-
-/* Link dentro do botão */
-.login-button button a {
-    text-decoration: none;
-    font-weight: 500;
-    color: #fff;
-}
-
-/* Linha decorativa abaixo do título */
-.form-header h1::after {
-    content: '';
-    display: block;
-    width: 5rem;
-    height: 0.3rem;
-    background-color: #628B35; /* Verde neon */
-    margin: 0 auto;
-    position: absolute;
-    border-radius: 10px;
-}
-
-/* Grupo de inputs (campos do formulário) */
+/* Grupo de inputs */
 .input-group {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 1rem 0;
-}
-
-/* Cada campo de entrada (nome, email, etc.) */
-.input-box {
-    display: flex;
     flex-direction: column;
-    margin-bottom: 1.1rem;
+    gap: 25px;
+    margin-bottom: 30px;
 }
 
 /* Estilização dos campos de input */
+.input-box {
+    position: relative;
+}
+
+.input-box label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
 .input-box input {
-    margin: 0.6rem 0;
-    padding: 0.8rem 1.2rem;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 1px 1px 6px #0000001c; /* Sombra leve */
-    font-size: 0.8rem;
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
 /* Cor de fundo ao passar o mouse */
 .input-box input:hover {
-    background-color: #eeeeee75; /* Cinza bem claro e translúcido */
+    border-color: #628B35;
+    background: #f5f8f1;
 }
 
-/* Borda azul clara quando o campo está em foco */
-.input-box input:focus-visible {
-    outline: 1px solid #628B35;
-}
-
-/* Estilização dos textos dos rótulos */
-.input-box label,
-.gender-title h6 {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #000000c0; /* Preto com opacidade */
+/* Borda verde quando o campo está em foco */
+.input-box input:focus {
+    border-color: #628B35;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(98, 139, 53, 0.1);
 }
 
 /* Cor do placeholder */
 .input-box input::placeholder {
-    color: #000000be; /* Preto com leve transparência */
+    color: #aaa;
+    transition: opacity 0.3s ease;
 }
 
-/* Grupo dos botões de seleção de tipo de resíduo */
-.gender-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.62rem;
-    padding: 0 .5rem;
+.input-box input:focus::placeholder {
+    opacity: 0.7;
 }
 
-/* Cada opção (entulho, reciclável, etc.) */
-.gender-input {
-    display: flex;
-    align-items: center;
+/* Grupo dos campos de nome (apenas no registro) */
+.name-group {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
-/* Espaço entre o botão e o texto */
-.gender-input input {
-    margin-right: 0.35rem;
+.name-group.active {
+    display: grid;
 }
 
-.gender-input label {
-    font-size: 0.81rem;
-    font-weight: 600;
-    color: #000000c0;
+/* Botão principal */
+.continue-button {
+    margin-bottom: 20px;
 }
 
-/* Botão de "Continuar" na parte inferior */
 .continue-button button {
     width: 100%;
-    margin-top: 2.5rem;
+    padding: 16px;
     border: none;
-    background-color: #628B35;
-    padding: 0.62rem;
-    border-radius: 5px;
+    background: linear-gradient(135deg, #628B35 0%, #4c6a23 100%);
+    border-radius: 12px;
     cursor: pointer;
     color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.continue-button button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.continue-button button:hover::before {
+    left: 100%;
 }
 
 /* Efeito ao passar o mouse no botão */
 .continue-button button:hover {
-    background-color: #4c6a23;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(98, 139, 53, 0.3);
 }
 
-/* Estilo do link dentro do botão */
-.continue-button button a {
-    text-decoration: none;
-    font-size: 0.93rem;
-    font-weight: 500;
-    color: #fff;
+.continue-button button:active {
+    transform: translateY(0);
 }
 
-.registro-bnt-hover:hover {
-    color: #4c6a23;
-}
-
-a{
-    text-decoration: none;
-    width: 100%;
-    margin-top: 2.5rem;
-    border: none;
-    background-color: #628B35;
-    padding: 0.62rem;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
+/* Botão de alternância (Login/Registro) */
+.toggle-button {
     text-align: center;
 }
 
-a:hover{
-    color: white;
+.toggle-link {
+    color: #9aa48f;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
+.toggle-link:hover {
+    color: #4c6a23;
+    text-decoration: underline;
+}
+
+/* Destaque para o "Registre-se" */
+.highlight {
+    color: #4c6a23; 
+    font-weight: 700;
+}
+
+/* Animações de entrada */
+.form {
+    animation: slideInRight 0.8s ease-out;
+}
+
+.form-image {
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Loading spinner */
+.loading {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 /* MEDIA QUERIES - Responsividade */
-
-/* Ajustes para telas menores que 1330px */
-@media screen and (max-width: 1330px) {
-    .form-image {
-        display: none; /* Some com a imagem para dar mais espaço */
-    }
+@media screen and (max-width: 1024px) {
     .container {
-        width: 50%; /* Reduz a largura */
+        width: 95%;
+        height: auto;
+        min-height: 500px;
     }
+
     .form {
-        width: 100%; /* Formulário passa a ocupar toda a largura */
+        padding: 40px 30px;
     }
 }
 
-/* Ajustes para telas menores que 1064px */
-@media screen and (max-width: 1064px) {
+/* Ajustes para telas menores que 768px */
+@media screen and (max-width: 768px) {
     .container {
-        width: 90%;
+        flex-direction: column;
+        width: 95%;
         height: auto;
     }
 
-    .input-group {
-        flex-direction: column; /* Empilha os campos */
-        z-index: 5;
-        padding-right: 5rem;
-        max-height: 10rem;
-        overflow-y: scroll; /* Adiciona scroll vertical se ultrapassar altura */
-        flex-wrap: nowrap;
+    .form-image {
+        height: 200px;
+        flex: none;
     }
 
-    .gender-inputs {
-        margin-top: 2rem;
+    .form-image img {
+        width: 120px;
+        height: 120px;
     }
 
-    .gender-group {
-        flex-direction: column; /* Empilha as opções de resíduo */
+    .form {
+        padding: 30px 20px;
     }
 
-    .gender-title h6 {
-        margin: 0;
+    .form-header h1 {
+        font-size: 2rem;
     }
 
-    .gender-input {
-        margin-top: 0.5rem;
+    .name-group {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Ajustes para telas muito pequenas */
+@media screen and (max-width: 480px) {
+    .container {
+        margin: 10px;
+        border-radius: 15px;
+    }
+
+    .form {
+        padding: 20px 15px;
+    }
+
+    .form-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .input-box input {
+        padding: 12px 15px;
     }
 }
