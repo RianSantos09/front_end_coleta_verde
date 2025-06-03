@@ -1,0 +1,594 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset básico e definição da fonte padrão */
+* { 
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box; 
+    font-family: 'Inter', sans-serif; 
+}
+
+/* Controle dos steps do formulário */
+.step { 
+    display: none; 
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.4s ease;
+}
+.step.active { 
+    display: block; 
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideInRight 0.5s ease-out; 
+}
+
+/* Estiliza o corpo da página */
+body {
+    font-family: 'Inter', sans-serif;
+    width: 100%; 
+    min-height: 100vh; 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh; align-items: center; background: #FFFDF5;
+    padding: 20px;
+    position: relative;
+}
+
+/* Efeito de partículas no fundo */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(46, 125, 50, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Container principal que envolve imagem e formulário */
+.container {
+    width: 100%; 
+    max-width: 1200px;
+    min-height: 600px;
+    display: flex;
+    background: rgba(255, 255, 255, 0.98); 
+    backdrop-filter: blur(20px);
+    border-radius: 24px; 
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Borda gradient sutil */
+.container::before {
+    content: ''; 
+    position: absolute; 
+    top: -2px; 
+    left: -2px; 
+    right: -2px; 
+    bottom: -2px;
+    background: linear-gradient(135deg, #4CAF50, #45a049, #2E7D32);
+    border-radius: 26px;
+    z-index: -1;
+}
+
+/* Área da imagem */
+.form-image {
+    width: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    background: linear-gradient(135deg, #E8F5E8 0%, #F1F8E9 100%);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito decorativo na área da imagem */
+.form-image::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(46, 125, 50, 0.05) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+}
+
+.form-image img { 
+    width: min(400px, 90%);
+    height: auto;
+    z-index: 1;
+    filter: drop-shadow(0 10px 25px rgba(76, 175, 80, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.form-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Formulário */
+.form {
+    width: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    padding: 3rem 2.5rem;
+    position: relative;
+}
+
+/* Cabeçalho do formulário */
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.form-header h1 {
+    color: #2E7D32; 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2E7D32, #4CAF50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+/* Linha decorativa abaixo do título */
+.form-header h1::after {
+    content: ''; 
+    display: block; 
+    width: 80px; 
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    margin: 15px auto 0;
+    border-radius: 2px;
+    animation: pulse 2s infinite;
+}
+
+/* Subtítulo */
+.form-header .subtitle { 
+    color: #666; 
+    font-size: 1.1rem; 
+    font-weight: 400; 
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
+/* Indicador de passos */
+.step-indicator { 
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 20px; 
+    gap: 20px;
+    position: relative;
+}
+
+.step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    right: 25%;
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 0;
+}
+
+.step-dot {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    background: #f5f5f5;
+    border: 3px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    color: #999;
+}
+
+.step-dot.active { 
+    background: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+}
+
+.step-dot.completed { 
+    background: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+}
+
+/* Barra de progresso */
+.progress-bar {
+    width: 100%; 
+    height: 6px; 
+    background: #e8e8e8; 
+    border-radius: 3px;
+    margin-bottom: 30px; 
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%; 
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    border-radius: 3px; 
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.progress-fill::after {
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.step h2 {
+    color: #2E7D32; 
+    font-size: 1.6rem; 
+    margin-bottom: 25px;
+    text-align: center; 
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Grupo de inputs */
+.input-group { 
+    display: grid; 
+    gap: 24px; 
+    width: 100%;
+}
+
+/* Cada campo de entrada */
+.input-box {
+    display: flex; 
+    flex-direction: column; 
+    position: relative;
+}
+
+.input-box label {
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    color: #333;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-box label i {
+    color: #4CAF50;
+    width: 16px;
+}
+
+/* Estilização dos campos de input */
+.input-box input {
+    padding: 16px 20px; 
+    border: 2px solid #e8e8e8; 
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+/* Estados dos inputs */
+.input-box input:hover { 
+    border-color: #c8e6c9;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.input-box input:focus {
+    outline: none;
+    border-color: #4CAF50; 
+    background: white; 
+    transform: translateY(-1px);
+    box-shadow: 
+        0 8px 25px rgba(76, 175, 80, 0.15),
+        0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.input-box input:valid:not(:placeholder-shown) { 
+    border-color: #4CAF50; 
+    background: rgba(232, 245, 233, 0.3);
+}
+
+/* Placeholder */
+.input-box input::placeholder {
+    color: #aaa; 
+    transition: opacity 0.3s ease;
+}
+.input-box input:focus::placeholder { 
+    opacity: 0.6; 
+}
+
+/* Layout responsivo  */
+.row { 
+    display: grid; 
+    grid-template-columns: 1fr 120px; 
+    gap: 20px; 
+    align-items: end; 
+}
+
+/* Botões  */
+.buttons {
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 40px; 
+    gap: 20px;
+    width: 100%;
+}
+
+.btn {
+    padding: 16px 32px; 
+    border: none; 
+    border-radius: 12px; 
+    font-size: 1rem;
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative; 
+    overflow: hidden; 
+    min-width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: none;
+}
+
+.btn::before {
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    left: -100%; 
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+.btn:hover::before { 
+    left: 100%; 
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4CAF50, #45a049); 
+    color: white;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+}
+.btn-primary:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(245, 245, 245, 0.8); 
+    color: #666; 
+    border: 2px solid #e0e0e0;
+    backdrop-filter: blur(10px);
+}
+.btn-secondary:hover {
+    background: rgba(238, 238, 238, 0.9); 
+    transform: translateY(-1px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn:disabled { 
+    opacity: 0.6; 
+    cursor: not-allowed; 
+    transform: none !important; 
+}
+
+/* Mensagem de sucesso */
+.success-message {
+    display: none; 
+    text-align: center; 
+    padding: 40px 20px; 
+    animation: bounceIn 0.8s ease-out;
+}
+
+.success-icon {
+    font-size: 4rem; 
+    color: #4CAF50; 
+    margin-bottom: 20px; 
+    animation: pulse 2s infinite;
+}
+
+.success-message h2 {
+    color: #2E7D32;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
+}
+
+.success-message p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Força da senha */
+.password-strength {
+    margin-top: 8px; 
+    height: 4px; 
+    background: #e8e8e8; 
+    border-radius: 2px;
+    overflow: hidden; 
+    transition: all 0.3s ease;
+}
+
+.password-strength-fill { 
+    height: 100%; 
+    transition: all 0.3s ease; 
+    border-radius: 2px; 
+}
+
+.strength-weak { background: linear-gradient(90deg, #f44336, #e57373); width: 25%; }
+.strength-medium { background: linear-gradient(90deg, #ff9800, #ffb74d); width: 50%; }
+.strength-strong { background: linear-gradient(90deg, #4CAF50, #81c784); width: 75%; }
+.strength-very-strong { background: linear-gradient(90deg, #2E7D32, #4CAF50); width: 100%; }
+
+/* Mensagens de erro */
+.error-message {
+    color: #f44336; 
+    font-size: 0.85rem; 
+    margin-top: 8px; 
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.error-message.show { 
+    opacity: 1; 
+    transform: translateY(0);
+}
+
+.error-message::before {
+    content: '⚠';
+    font-size: 12px;
+}
+
+/* Animações */
+@keyframes slideInRight { 
+    from { opacity: 0; transform: translateX(30px); } 
+    to { opacity: 1; transform: translateX(0); } 
+}
+
+@keyframes shimmer { 
+    0% { transform: translateX(-100%); } 
+    100% { transform: translateX(100%); } 
+}
+
+@keyframes bounceIn { 
+    0% { opacity: 0; transform: scale(0.3); } 
+    50% { transform: scale(1.05); } 
+    70% { transform: scale(0.9); } 
+    100% { opacity: 1; transform: scale(1); } 
+}
+
+@keyframes pulse { 
+    0%, 100% { transform: scale(1); opacity: 1; } 
+    50% { transform: scale(1.05); opacity: 0.8; } 
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Media queries para responsividade */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        max-width: 600px;
+        margin: 20px;
+    }
+    
+    .form-image, .form {
+        width: 100%;
+    }
+    
+    .form-image {
+        min-height: 200px;
+        padding: 1.5rem;
+    }
+    
+    .form-image img {
+        width: min(250px, 80%);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container { 
+        margin: 0;
+        border-radius: 16px;
+        min-height: auto;
+    }
+    
+    .form {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-header h1 { 
+        font-size: 2rem; 
+    }
+    
+    .buttons { 
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+        padding: 14px 24px;
+    }
+    
+    .row { 
+        grid-template-columns: 1fr; 
+        gap: 15px;
+    }
+    
+    .step-indicator {
+        gap: 15px;
+    }
+    
+    .step-dot {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .input-box input {
+        padding: 14px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .step h2 {
+        font-size: 1.4rem;
+    }
+}
