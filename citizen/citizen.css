@@ -1,0 +1,193 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #fefbf4;
+}
+
+header {
+  background-color: #153b13;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* para permitir quebra em telas pequenas */
+}
+
+header h1 {
+  color: white;
+  font-size: 1.5rem;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* espaço entre logo e título */
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  display: inline;
+}
+
+.novo-agendamento {
+  background-color: #5b7f2c;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.perfil {
+  background-color: #e6ded6;
+  margin: 2rem;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border-radius: 10px;
+  flex-wrap: wrap; /* permite que itens quebrem linha */
+}
+
+.user-icon {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  font-size: 80px; /* ícone do mesmo tamanho do círculo */
+  line-height: 80px;
+  text-align: center;
+  border-radius: 50%;
+  border: 3px solid #5b7f2c;
+  color: #5b7f2c;
+  background-color: transparent;
+  flex-shrink: 0;
+}
+
+.agendamentos {
+  margin: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.agendamentos-header {
+  background-color: #153b13;
+  color: white;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+th {
+  background-color: #5b7f2c;
+  color: white;
+  padding: 0.8rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+td {
+  background-color: #fff;
+  padding: 0.8rem;
+  border-top: 1px solid #eee;
+  white-space: nowrap;
+}
+
+.status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: white;
+  text-align: center;
+  width: 80px;
+}
+
+.concluido { background-color: #1abc9c; }
+.pendente { background-color: #f1c40f; color: black; }
+.cancelado { background-color: #e74c3c; }
+
+button.btn-acoes {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  color: #333;
+}
+
+button.btn-acoes:hover {
+  opacity: 0.8;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  header > div {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .novo-agendamento {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .perfil {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .user-icon {
+    margin-bottom: 0.5rem;
+  }
+
+  .agendamentos {
+    margin: 1rem;
+    overflow-x: auto; /* permite scroll horizontal na tabela */
+  }
+
+  table {
+    min-width: 600px; /* força largura mínima para tabela */
+  }
+}
+
+@media (max-width: 400px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .novo-agendamento {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .user-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 60px;
+    line-height: 60px;
+    border-width: 2px;
+  }
+}
