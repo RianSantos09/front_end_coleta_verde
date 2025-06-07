@@ -31,25 +31,24 @@
         class="fixed-top bg-success text-white py-3 px-4 d-flex justify-content-between align-items-center shadow-sm">
         <div class="d-flex align-items-center">
             <!-- Ícone do logo -->
-            <svg class="me-2" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 18H9V12H11V18ZM15 18H13V12H15V18ZM12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4ZM12 6C10.6 6 9.2 6.48 8 7.28V6H6V18H8V16.72C9.2 17.52 10.6 18 12 18C16.42 18 20 14.42 20 10C20 7.58 16.42 4 12 4Z"
-                    fill="#FFFDF5" />
-            </svg>
+            <img src="../src/pages/auth/" alt="">
+            
             <!-- Título do sistema -->
             <h1 class="h4 mb-0">COLETA VERDE</h1>
         </div>
 
         <!-- Botão de logout -->
-        <button class="btn btn-primary btn-sm rounded-pill d-flex align-items-center">
-            <!-- Ícone de logout -->
-            <svg class="me-1" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.59L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z"
-                    fill="white" />
-            </svg>
-            Log out
-        </button>
+        <a href="../src/pages/auth/login.html">
+            <button class="btn btn-primary btn-sm rounded-pill d-flex align-items-center">
+                <!-- Ícone de logout -->
+                <svg class="me-1" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.59L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z"
+                        fill="white" />
+                </svg>
+                Log out
+            </button>
+        </a>
     </header>
 
     <!-- Conteúdo principal com cards -->
@@ -92,7 +91,7 @@
 
             <!-- Card: Editar Funcionários -->
             <div class="col">
-                <a href="#" class="text-decoration-none">
+                <a href="editar-funcionario.html" class="text-decoration-none">
                     <div class="card h-100 shadow-sm p-4 d-flex flex-column align-items-center text-center">
                         <i class="fas fa-user-edit text-success mb-3" style="font-size: 4rem;"></i>
                         <h2 class="h5 fw-bold text-success">EDITAR FUNC</h2>
