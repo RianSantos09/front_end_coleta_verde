@@ -41,6 +41,11 @@ header > div {
   white-space: nowrap;
 }
 
+.novo-agendamento a {
+    color: white;
+    text-decoration: none;
+  }
+
 .perfil {
   background-color: #e6ded6;
   margin: 2rem;
@@ -182,6 +187,7 @@ button.btn-acoes:hover {
     font-size: 1rem;
     padding: 0.8rem;
   }
+
 
   .user-icon {
     width: 60px;

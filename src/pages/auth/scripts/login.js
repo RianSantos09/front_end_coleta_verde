@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 /* TODO: fazer a correção de redirecionamento */
 
               // Redireciona para o dashboard ou página principal
-              window.location.href = 'dashboard.html';
+              window.location.href = '../../../citizen/citizen.html';
           } else {
               alert(data.message || 'Email ou senha incorretos.');
           }

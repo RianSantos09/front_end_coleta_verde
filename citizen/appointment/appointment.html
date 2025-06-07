@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Agendamento</title>
+  <link rel="stylesheet" href="novo-agendamento.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="../appointment/appointment.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="../../public/assets/img/coleta-verde-header-logo.png" alt="Logo" class="logo">
+      <h1>Coleta Verde</h1>
+    </div>
+    <button class="btn-voltar">
+      <a href="../citizen.html">← Voltar</a>
+    </button>
+  </header>
+
+  <main class="container">
+    <form class="card" id="form-agendamento">
+      <div class="card-header">Novo Agendamento de Coleta</div>
+
+      <label>ID</label>
+      <input type="text" placeholder="Será gerado automaticamente" disabled>
+      <small>O ID será gerado automaticamente após o cadastro</small>
+
+      <label for="data">Data Agendada<span>*</span></label>
+      <input type="date" id="data" required>
+      <small>Selecione uma data nos próximos 3 meses</small>
+
+      <label>Foto (Opcional)</label>
+      <div class="upload-box" onclick="selecionarImagem()">
+        <span class="material-symbols-outlined upload-icon">upload</span>
+        <p>Clique para fazer upload ou arraste uma imagem</p>
+        <small>PNG, JPG, GIF até 5MB</small>
+        <button type="button" class="btn-upload">Selecionar Imagem</button>
+      </div>
+
+      <label for="tipo">Tipo de Resíduo<span>*</span></label>
+      <select id="tipo" required>
+        <option value="">Selecione o tipo de resíduo</option>
+        <option>Eletrônicos</option>
+        <option>Óleo de cozinha</option>
+        <option>Recicláveis</option>
+        <option>Pilhas e baterias</option>
+      </select>
+
+      <label for="descricao">Descrição (Opcional)</label>
+      <textarea id="descricao" rows="4" placeholder="Descreva detalhes sobre o material que será coletado..."></textarea>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancelar">Cancelar</button>
+        <button type="submit" class="btn-confirmar">✓ Confirmar Agendamento</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="../appointment/appointment.js"></script>
+</body>
+</html>
