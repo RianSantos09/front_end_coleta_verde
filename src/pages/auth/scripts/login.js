@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (response.ok) {
               alert('Login bem-sucedido!');
                 /* TODO: add localStorage para token  */
+                localStorage.setItem('token', data.token);
                 /* TODO: fazer a correção de redirecionamento */
 
               // Redireciona para o dashboard ou página principal
