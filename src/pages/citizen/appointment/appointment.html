@@ -29,9 +29,10 @@
       <input type="text" placeholder="Será gerado automaticamente" disabled>
       <small>O ID será gerado automaticamente após o cadastro</small>
 
-      <label for="data">Data Agendada<span>*</span></label>
-      <input type="date" id="data" required>
-      <small>Selecione uma data nos próximos 3 meses</small>
+      <label for="data">Data e Hora Agendada<span>*</span></label>
+      <input type="datetime-local" id="data" required>
+      <small>Selecione data e hora nos próximos 3 meses</small>
+
 
       <label>Foto (Opcional)</label>
       <div class="upload-box" onclick="selecionarImagem()">
@@ -44,10 +45,10 @@
       <label for="tipo">Tipo de Resíduo<span>*</span></label>
       <select id="tipo" required>
         <option value="">Selecione o tipo de resíduo</option>
-        <option>Eletrônicos</option>
-        <option>Óleo de cozinha</option>
-        <option>Recicláveis</option>
-        <option>Pilhas e baterias</option>
+        <option value="1">Eletrônicos</option>
+        <option value="2">Óleo de cozinha</option>
+        <option value="3">Recicláveis</option>
+        <option value="4">Pilhas e baterias</option>
       </select>
 
       <label for="descricao">Descrição (Opcional)</label>
