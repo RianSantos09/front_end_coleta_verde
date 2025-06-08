@@ -1,3 +1,6 @@
+// Variável global para armazenar os agendamentos
+let agendamentosGlobais = [];
+
 document.addEventListener("DOMContentLoaded", async () => { 
   const token = localStorage.getItem("token");
 
@@ -62,22 +65,39 @@ function exibirAgendamentos(agendamentos) {
 
   tbody.innerHTML = agendamentos.map(ag => {
     const id = ag.id ?? ag.appointment?.id ?? "N/A";
-    const nomeRequester = ag.requester_name || "N/A";
-    const tipoResiduo = ag.waste_type || ag.waste?.type || "N/A";
+    const tipoResiduo = ag.wasteItem?.type ?? "Tipo não informado";
 
     return `
       <tr>
-        <td>${id}</td>
         <td>${formatarData(ag.scheduled_at)}</td>
         <td>${tipoResiduo}</td>
         <td><span class="status ${ag.status.toLowerCase()}">${capitalize(ag.status)}</span></td>
-        <td><button class="btn-acoes" onclick="editar('${id}')">&#9998;</button></td>
-        <td><button class="btn-acoes" onclick="cancelar('${id}')">❌</button></td>
+        <td><button class="btn-acoes btn-editar" data-id="${id}">&#9998;</button></td>
+        <td><button class="btn-acoes btn-cancelar" data-id="${id}">❌</button></td>
       </tr>
     `;
   }).join("");
-}
 
+  // Adiciona os listeners depois que o HTML está inserido
+  document.querySelectorAll(".btn-cancelar").forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.getAttribute("data-id");
+      const appointment = agendamentosGlobais.find(a => (a.id ?? a.appointment?.id) === id);
+      if (appointment) {
+        cancelarAgendamento(appointment);
+      } else {
+        alert("Agendamento não encontrado.");
+      }
+    });
+  });
+
+  document.querySelectorAll(".btn-editar").forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.getAttribute("data-id");
+      editar(id);
+    });
+  });
+}
 
 // Função auxiliar para capitalizar texto
 function capitalize(str) {
@@ -105,6 +125,7 @@ async function carregarAgendamentos() {
     if (!res.ok) throw new Error("Erro ao buscar agendamentos");
 
     const appointments = await res.json();
+    agendamentosGlobais = appointments; // salva globalmente
     exibirAgendamentos(appointments);
 
   } catch (error) {
@@ -112,41 +133,44 @@ async function carregarAgendamentos() {
   }
 }
 
-function editar(id) {
-  console.log("Editar ID:", id);
-  if (!id || typeof id !== "string" || id.length < 10) {
-    return alert("ID inválido para editar.");
-  }
-
-  // Aqui você poderia redirecionar para uma tela de edição:
-  window.location.href = `appointment/edit.html?id=${id}`;
-}
-
-function cancelar(id) {
-  console.log("Cancelar ID:", id);
-  if (!id || typeof id !== "string" || id.length < 10) {
-    return alert("ID inválido para cancelar.");
-  }
-
+async function cancelarAgendamento(appointment) {
   const token = localStorage.getItem("token");
-  if (!token) return alert("Usuário não autenticado.");
 
-  if (!confirm("Tem certeza que deseja cancelar este agendamento?")) return;
+  // Monta o corpo da requisição incluindo o type do resíduo
+  const requestBody = {
+    scheduled_at: appointment.scheduled_at,
+    optional_photo_url: appointment.optional_photo_url || null,
+    waste: {
+      id: appointment.wasteItem.id,
+      type: appointment.wasteItem.type,
+      description: appointment.wasteItem.description // << necessário
+    },
+    status: "CANCELED"
+  };
 
-  fetch(`http://localhost:8080/api/appointments/${id}/cancel`, {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json"
-    }
-  })
-    .then(response => {
-      if (!response.ok) throw new Error("Erro ao cancelar agendamento.");
-      alert("Agendamento cancelado com sucesso!");
-      location.reload();
-    })
-    .catch(error => {
-      console.error("Erro:", error);
-      alert("Erro ao cancelar o agendamento.");
+
+  try {
+    const response = await fetch(`http://localhost:8080/api/appointments/${appointment.id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestBody)
     });
+
+    if (!response.ok) {
+      const errorMsg = await response.text();
+      throw new Error(errorMsg || "Erro ao cancelar agendamento.");
+    }
+
+    const data = await response.json();
+    alert("Agendamento cancelado com sucesso!");
+
+    await carregarAgendamentos();
+
+  } catch (error) {
+    console.error("Erro ao cancelar agendamento:", error);
+    alert("Erro ao cancelar agendamento: " + error.message);
+  }
 }
