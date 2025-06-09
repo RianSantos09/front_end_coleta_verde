@@ -1,0 +1,93 @@
+/* Reset básico */
+body {
+    margin: 0;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #18834C;
+    padding: 1rem 2rem;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header button,
+header a {
+    background-color: #1266F1;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Cartões principais */
+.card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1000px;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 2rem;
+    text-align: center;
+    width: 220px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card h2 {
+    color: #18834C;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    color: #555;
+}
+
+/* Título Central */
+.main-title {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.main-title h1 {
+    color: #18834C;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.main-title p {
+    color: #1266F1;
+    font-size: 1.2rem;
+}
+
+/* Rodapé */
+footer {
+    background-color: #18834C;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
