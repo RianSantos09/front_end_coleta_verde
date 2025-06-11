@@ -54,29 +54,33 @@
     <table class="table table-bordered table-striped">
       <thead class="table-success text-center">
         <tr>
-          <th>ENDEREÇO</th>
-          <th>TIPO DE RESÍDUO</th>
-          <th>CONFIRMAR COLETA</th>
-          <th>CANCELAR COLETA</th>
+          <th>Endereço</th>
+          <th>Tipo de Resíduo</th>
+          <th>Status</th>
+          <th>Confirmar Coleta</th>
+          <th>Cancelar Coleta</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Endereço, Nº - Cidade</td>
           <td>Eletrônicos</td>
-          <td class="text-center"><button class="btn btn-success">CONFIRMAR</button></td>
+          <td>---</td>
+          <td class="text-center"><button class="btn btn-success btn-confirmar">CONFIRMAR</button></td>
           <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html">CANCELAR</a></td>
         </tr>
         <tr>
           <td>Endereço, Nº - Cidade</td>
           <td>Móveis</td>
-          <td class="text-center"><button class="btn btn-success">CONFIRMAR</button></td>
+          <td>---</td>
+          <td class="text-center"><button class="btn btn-success btn-confirmar">CONFIRMAR</button></td>
           <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html">CANCELAR</a></td>
         </tr>
         <tr>
           <td>Endereço, Nº - Cidade</td>
           <td>Hospitalar</td>
-          <td class="text-center"><button class="btn btn-success">CONFIRMAR</button></td>
+          <td>---</td>
+          <td class="text-center"><button class="btn btn-success btn-confirmar">CONFIRMAR</button></td>
           <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html">CANCELAR</a></td>
         </tr>
       </tbody>
@@ -91,5 +95,9 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!--Script para confirmar a coleta-->
+  <script src="../scripts/confirmar-coleta.js"></script>
+
 </body>
 </html>
