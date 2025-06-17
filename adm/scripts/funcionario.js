@@ -2,57 +2,67 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const employeeForm = document.getElementById('employeeForm');
+    // NOVAS LINHAS: Seleciona o botão do olho e o campo da senha
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('senha');
 
-    // Verifica se o formulário existe na página
-    if (!employeeForm) {
-        console.error('Elemento com ID "employeeForm" não encontrado. Verifique o HTML.');
-        return;
+    // NOVO BLOCO DE CÓDIGO: Lógica para alternar a visibilidade da senha
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            togglePassword.querySelector('i').classList.toggle('fa-eye');
+            togglePassword.querySelector('i').classList.toggle('fa-eye-slash');
+        });
     }
 
-    employeeForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Impede o envio padrão do formulário
+    if (employeeForm) {
+        employeeForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-        // Cria um objeto para armazenar APENAS os dados necessários para o cadastro
-        const employeeData = {
-            nome: document.getElementById('nome').value,
-            email: document.getElementById('email').value,
-            senha: document.getElementById('senha').value,
-            matricula: document.getElementById('matricula').value,
-            cargo: document.getElementById('cargo').value,
-            // O campo 'status' e 'id' geralmente são definidos no backend para novos cadastros.
-            // O 'id' é gerado automaticamente, e o 'status' pode ter um valor padrão (ex: 'ativo').
-        };
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            // LINHA ALTERADA: Pega o valor do campo de senha usando passwordInput
+            const senha = passwordInput.value;
+            const matricula = document.getElementById('matricula').value;
+            const cargo = document.getElementById('cargo').value;
 
-        // --- Ações com os dados coletados ---
-        // 1. Exibir no console para depuração:
-        console.log('Dados do novo funcionário para cadastro:', employeeData);
+            const employeeData = {
+                name: nome,
+                email: email,
+                password: senha,
+                registration: matricula,
+                role: cargo
+            };
 
-        // 2. Enviar para o servidor (Backend) usando Fetch API:
-        fetch('http://localhost:8080/api/employees/employee', { // Seu endpoint POST para salvar funcionário
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer SEU_TOKEN_AQUI' // Se sua API exige autenticação
-            },
-            body: JSON.stringify(employeeData),
-        })
-        .then(response => {
-            if (!response.ok) {
-                // Se a resposta não for OK (status 2xx), tenta ler a mensagem de erro do backend
-                return response.json().then(errorData => { 
-                    throw new Error(errorData.message || 'Erro no servidor ao cadastrar.'); 
+            console.log('Dados do funcionário para envio:', employeeData);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/employees/employee', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(employeeData)
                 });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('Funcionário cadastrado com sucesso!');
+                    console.log('Resposta da API:', result);
+                    employeeForm.reset();
+                } else {
+                    const errorData = await response.json();
+                    alert(`Erro ao cadastrar funcionário: ${errorData.message || response.statusText}`);
+                    console.error('Erro na resposta da API:', errorData);
+                }
+            } catch (error) {
+                console.error('Erro ao enviar requisição:', error);
+                alert('Ocorreu um erro ao tentar se conectar com o servidor.');
             }
-            return response.json(); // Se OK, retorna os dados do funcionário cadastrado
-        })
-        .then(data => {
-            console.log('Funcionário cadastrado com sucesso:', data);
-            alert('Funcionário cadastrado com sucesso!');
-            employeeForm.reset(); // Limpa o formulário após o sucesso
-        })
-        .catch((error) => {
-            console.error('Erro ao cadastrar funcionário:', error);
-            alert('Erro ao cadastrar funcionário: ' + error.message);
         });
-    });
+    } else {
+        console.error("Formulário com ID 'employeeForm' não encontrado.");
+    }
 });
