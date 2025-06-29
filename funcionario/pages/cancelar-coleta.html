@@ -32,7 +32,8 @@
 
   <main class="cancelamento">
     <h2>CANCELAMENTO DE COLETA</h2>
-    <form id="form-cancelamento">
+    <form id="cancelarForm" enctype="multipart/form-data">
+      <input type="hidden" id="appointmentId" name="appointmentId" value="" />
 
       <label for="motivo">Motivo do Cancelamento:</label>
       <textarea id="motivo" name="motivo"></textarea>
@@ -42,8 +43,8 @@
 
       <br><br>
       <!-- Botão para enviar -->
-      <div">
-        <button class="confirmar">ENVIAR</button>
+      <div>
+        <button class="confirmar" type="submit">ENVIAR</button>
       </div>
 
     </form>

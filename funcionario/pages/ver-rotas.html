@@ -61,27 +61,27 @@
           <th>Cancelar Coleta</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="corpo-tabela">
         <tr>
           <td>Endereço, Nº - Cidade</td>
           <td>Eletrônicos</td>
-          <td>---</td>
-          <td class="text-center"><button class="btn btn-success btn-confirmar">CONFIRMAR</button></td>
-          <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html">CANCELAR</a></td>
+          <td class="status-coleta" data-id="$1">STATUS</td>
+          <td class="text-center"><button class="btn btn-success btn-confirmar" data-id="1">CONFIRMAR</button></td>
+          <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html?id=1">CANCELAR</a></td>
         </tr>
         <tr>
           <td>Endereço, Nº - Cidade</td>
           <td>Móveis</td>
-          <td>---</td>
-          <td class="text-center"><button class="btn btn-success btn-confirmar">CONFIRMAR</button></td>
-          <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html">CANCELAR</a></td>
+          <td class="status-coleta" data-id="2">STATUS</td>
+          <td class="text-center"><button class="btn btn-success btn-confirmar" data-id="2">CONFIRMAR</button></td>
+          <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html?id=2">CANCELAR</a></td>
         </tr>
         <tr>
           <td>Endereço, Nº - Cidade</td>
           <td>Hospitalar</td>
-          <td>---</td>
-          <td class="text-center"><button class="btn btn-success btn-confirmar">CONFIRMAR</button></td>
-          <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html">CANCELAR</a></td>
+          <td class="status-coleta" data-id="3">STATUS</td>
+          <td class="text-center"><button class="btn btn-success btn-confirmar" data-id="3">CONFIRMAR</button></td>
+          <td class="text-center"><a class="btn btn-danger" href="cancelar-coleta.html?id=3">CANCELAR</a></td>
         </tr>
       </tbody>
     </table>
@@ -95,6 +95,63 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script para carregar dados do agendamento/da coleta-->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("/api/coletas")
+        .then(response => response.json())
+        .then(coletas => {
+          const tabela = document.getElementById("corpo-tabela");
+
+          coletas.forEach(coleta => {
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+              <td>${formatarEndereco(coleta.requester?.address)}</td>
+              <td>${coleta.wasteItem?.type || 'Desconhecido'}</td>
+              <td class="status-coleta text-center" data-id="${coleta.id}"></td>
+              <td class="text-center">
+                <button class="btn btn-success btn-confirmar" data-id="${coleta.id}">Confirmar</button>
+              </td>
+              <td class="text-center">
+                <a class="btn btn-danger" href="cancelar-coleta.html?id=${coleta.id}">Cancelar</a>
+              </td>
+            `;
+
+            tabela.appendChild(tr);
+          });
+
+          preencherStatus(coletas);
+        })
+        .catch(error => {
+          console.error("Erro ao carregar agendamentos:", error);
+        });
+
+      function preencherStatus(coletas) {
+        coletas.forEach(coleta => {
+          const statusTd = document.querySelector(`.status-coleta[data-id="${coleta.id}"]`);
+          if (statusTd) {
+            statusTd.textContent = formatarStatus(coleta.status);
+          }
+        });
+      }
+
+      function formatarStatus(status) {
+        switch (status) {
+          case "SCHEDULED": return "Agendado";
+          case "COMPLETED": return "Finalizado";
+          case "NOT_COMPLETED": return "Não realizado";
+          default: return "Desconhecido";
+        }
+      }
+
+      function formatarEndereco(endereco) {
+        if (!endereco) return "Sem endereço";
+        return `${endereco.street}, ${endereco.number} - ${endereco.city || ""}`;
+      }
+    });
+  </script>
 
   <!--Script para confirmar a coleta-->
   <script src="../scripts/confirmar-coleta.js"></script>
